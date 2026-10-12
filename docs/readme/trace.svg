@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="428" viewBox="0 0 1200 428" role="img" aria-label="Trace de uma requisição pelas 7 camadas: 38 ms">
+  <style>
+    text { font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Code', Menlo, Consolas, monospace; font-size: 15px; }
+    .bar { transform-box: fill-box; transform-origin: left; transform: scaleX(0); animation: grow 9s cubic-bezier(.16,1,.3,1) infinite; }
+    @keyframes grow { 0% { transform: scaleX(0); } 14% { transform: scaleX(1); } 90% { transform: scaleX(1); opacity: 1; } 96%, 100% { transform: scaleX(1); opacity: 0; } }
+    .done { opacity: 0; animation: done 9s ease infinite; animation-delay: 4.35s; }
+    @keyframes done { 0% { opacity: 0; } 4%, 86% { opacity: 1; } 92%, 100% { opacity: 0; } }
+  </style>
+  <rect width="1200" height="428" rx="18" fill="#09090B"/>
+  <rect x=".5" y=".5" width="1199" height="427" rx="17.5" fill="none" stroke="#2C2B33"/>
+  <text x="48" y="48" fill="#8C8A93" style="letter-spacing:.08em;font-size:13px">TRACE · 7F3A9C2E · GET /api/davi</text>
+  <text x="1152" y="48" fill="#8C8A93" text-anchor="end" style="letter-spacing:.08em;font-size:13px">SPAN · DURAÇÃO</text>
+  <line x1="40" x2="1160" y1="66" y2="66" stroke="#232229"/>
+  
+  <g>
+    <text x="48" y="98" fill="#ECE8E1">Request</text>
+    <text x="446" y="98" fill="#8C8A93" text-anchor="end" style="font-size:13px">Kestrel · HTTP/2</text>
+    <rect x="470" y="85" width="590" height="14" rx="3" fill="#15151A"/>
+    <rect class="bar" x="470" y="85" width="15.526315789473683" height="14" rx="3" fill="#6F6C78" style="animation-delay:0.40s;--p:7.9%"/>
+    <text x="1152" y="98" fill="#8C8A93" text-anchor="end">1 ms</text>
+  </g>
+  <g>
+    <text x="48" y="136" fill="#ECE8E1">Middleware</text>
+    <text x="446" y="136" fill="#8C8A93" text-anchor="end" style="font-size:13px">JWT · policies · rate limit</text>
+    <rect x="470" y="123" width="590" height="14" rx="3" fill="#15151A"/>
+    <rect class="bar" x="485.5263157894737" y="123" width="46.57894736842105" height="14" rx="3" fill="#6F6C78" style="animation-delay:0.71s;--p:12.6%"/>
+    <text x="1152" y="136" fill="#8C8A93" text-anchor="end">3 ms</text>
+  </g>
+  <g>
+    <text x="48" y="174" fill="#ECE8E1">Endpoint</text>
+    <text x="446" y="174" fill="#8C8A93" text-anchor="end" style="font-size:13px">Minimal APIs · OpenAPI</text>
+    <rect x="470" y="161" width="590" height="14" rx="3" fill="#15151A"/>
+    <rect class="bar" x="532.1052631578947" y="161" width="31.052631578947366" height="14" rx="3" fill="#6F6C78" style="animation-delay:1.13s;--p:16.6%"/>
+    <text x="1152" y="174" fill="#8C8A93" text-anchor="end">2 ms</text>
+  </g>
+  <g>
+    <text x="48" y="212" fill="#ECE8E1">Application</text>
+    <text x="446" y="212" fill="#8C8A93" text-anchor="end" style="font-size:13px">CQRS · FluentValidation</text>
+    <rect x="470" y="199" width="590" height="14" rx="3" fill="#15151A"/>
+    <rect class="bar" x="563.1578947368421" y="199" width="93.1578947368421" height="14" rx="3" fill="#6F6C78" style="animation-delay:1.50s;--p:23.3%"/>
+    <text x="1152" y="212" fill="#8C8A93" text-anchor="end">6 ms</text>
+  </g>
+  <g>
+    <text x="48" y="250" fill="#ECE8E1">Domain</text>
+    <text x="446" y="250" fill="#8C8A93" text-anchor="end" style="font-size:13px">entidades · invariantes</text>
+    <rect x="470" y="237" width="590" height="14" rx="3" fill="#15151A"/>
+    <rect class="bar" x="656.3157894736842" y="237" width="31.052631578947366" height="14" rx="3" fill="#6F6C78" style="animation-delay:2.09s;--p:27.3%"/>
+    <text x="1152" y="250" fill="#8C8A93" text-anchor="end">2 ms</text>
+  </g>
+  <g>
+    <text x="48" y="288" fill="#ECE8E1">Infrastructure</text>
+    <text x="446" y="288" fill="#8C8A93" text-anchor="end" style="font-size:13px">EF Core · PostgreSQL</text>
+    <rect x="470" y="275" width="590" height="14" rx="3" fill="#15151A"/>
+    <rect class="bar" x="687.3684210526316" y="275" width="326.0526315789474" height="14" rx="3" fill="#9D8CFF" style="animation-delay:2.46s;--p:43.6%"/>
+    <text x="1152" y="288" fill="#8C8A93" text-anchor="end">21 ms</text>
+  </g>
+  <g>
+    <text x="48" y="326" fill="#ECE8E1">Response</text>
+    <text x="446" y="326" fill="#8C8A93" text-anchor="end" style="font-size:13px">200 OK</text>
+    <rect x="470" y="313" width="590" height="14" rx="3" fill="#15151A"/>
+    <rect class="bar last" x="1013.421052631579" y="313" width="46.57894736842105" height="14" rx="3" fill="#6F6C78" style="animation-delay:3.93s;--p:48.3%"/>
+    <text x="1152" y="326" fill="#8C8A93" text-anchor="end">3 ms</text>
+  </g>
+  <line x1="40" x2="1160" y1="376" y2="376" stroke="#232229"/>
+  <text x="48" y="404" fill="#8C8A93" style="letter-spacing:.08em;font-size:13px">STATUS</text>
+  <text class="done" x="1152" y="404" fill="#9D8CFF" text-anchor="end" style="font-size:16px">200 OK · 38 ms</text>
+</svg>

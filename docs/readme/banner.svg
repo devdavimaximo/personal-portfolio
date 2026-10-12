@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="354" viewBox="0 0 1200 354" role="img" aria-label="GET /davi HTTP/2 → 200 OK">
+  <style>
+    text { font-family: ui-monospace, 'SFMono-Regular', 'Cascadia Code', Menlo, Consolas, monospace; font-size: 19px; white-space: pre; }
+    .type { transform-box: fill-box; transform-origin: left; transform: scaleX(0); animation-name: type; animation-iteration-count: infinite; animation-timing-function: steps(28, end); }
+    @keyframes type { 0% { transform: scaleX(0); } 9% { transform: scaleX(1); } 92% { transform: scaleX(1); } 96%, 100% { transform: scaleX(0); } }
+    .caret { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .pulse { animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .35; } }
+  </style>
+  <defs>
+    <linearGradient id="glow" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#9D8CFF" stop-opacity=".16"/>
+      <stop offset=".55" stop-color="#9D8CFF" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#232229" stroke-width="1" opacity=".6"/></pattern>
+    <clipPath id="c0"><rect class="type" x="56" y="78" width="1100" height="30" style="animation-delay:0.3s;animation-duration:10s;--d:3.9600000000000004%"/></clipPath>
+    <clipPath id="c1"><rect class="type" x="56" y="108" width="1100" height="30" style="animation-delay:0.8160000000000001s;animation-duration:10s;--d:8.280000000000001%"/></clipPath>
+    <clipPath id="c3"><rect class="type" x="56" y="154" width="1100" height="30" style="animation-delay:1.7640000000000002s;animation-duration:10s;--d:3.5999999999999996%"/></clipPath>
+    <clipPath id="c4"><rect class="type" x="56" y="184" width="1100" height="30" style="animation-delay:2.244s;animation-duration:10s;--d:6.12%"/></clipPath>
+    <clipPath id="c5"><rect class="type" x="56" y="214" width="1100" height="30" style="animation-delay:2.976s;animation-duration:10s;--d:9%"/></clipPath>
+    <clipPath id="c6"><rect class="type" x="56" y="244" width="1100" height="30" style="animation-delay:3.996s;animation-duration:10s;--d:9%"/></clipPath>
+    <clipPath id="c7"><rect class="type" x="56" y="274" width="1100" height="30" style="animation-delay:5.016s;animation-duration:10s;--d:4.68%"/></clipPath>
+  </defs>
+  <rect width="1200" height="354" rx="18" fill="#09090B"/>
+  <rect width="1200" height="354" rx="18" fill="url(#grid)"/>
+  <rect width="1200" height="354" rx="18" fill="url(#glow)"/>
+  <rect x=".5" y=".5" width="1199" height="353" rx="17.5" fill="none" stroke="#2C2B33"/>
+  <g>
+    <circle class="pulse" cx="62" cy="40" r="5" fill="#9D8CFF"/>
+    <text x="80" y="46" fill="#8C8A93" style="font-size:14px;letter-spacing:.06em">davi@portfolio · bash · TLS 1.3</text>
+    <text x="1144" y="46" fill="#8C8A93" text-anchor="end" style="font-size:14px;letter-spacing:.06em">C# · .NET · React · Three.js</text>
+    <line x1="40" x2="1160" y1="66" y2="66" stroke="#232229"/>
+  </g>
+  
+    
+    <text x="56" y="98" clip-path="url(#c0)" fill="#ECE8E1"><tspan fill="#9D8CFF">› GET</tspan> /davi HTTP/2</text>
+    
+    <text x="56" y="128" clip-path="url(#c1)" fill="#8C8A93">  accept: backend, fullstack, interfaces que fazem jus</text>
+    
+    <text x="56" y="174" clip-path="url(#c3)" fill="#9D8CFF">‹ HTTP/2 200 OK</text>
+    
+    <text x="56" y="204" clip-path="url(#c4)" fill="#ECE8E1">  x-developer:     Davi Maximo Quoos</text>
+    
+    <text x="56" y="234" clip-path="url(#c5)" fill="#ECE8E1">  x-focus:         C# · .NET · ASP.NET Core · EF Core · PostgreSQL</text>
+    
+    <text x="56" y="264" clip-path="url(#c6)" fill="#ECE8E1">  x-architecture:  clean · dependências apontando para dentro</text>
+    
+    <text x="56" y="294" clip-path="url(#c7)" fill="#ECE8E1">  x-response-time: 38 ms</text>
+  <rect class="caret" x="56" y="306" width="11" height="21" fill="#9D8CFF"/>
+</svg>
