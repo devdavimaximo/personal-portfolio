@@ -538,11 +538,21 @@ function Rig() {
     // câmera de perseguição
     const dom = clamp(flow.s - 4);
     const swing = Math.sin(Math.PI * dom);
-    tmpCam.copy(flow.packet).add({ x: swing * 1.6 + par.current.x * 0.6, y: 0.85 - par.current.y * 0.4, z: 5.6 + swing * 1.2 } as THREE.Vector3);
+    // em tela em pé o desvio lateral no Domain empurrava o cristal para fora: metade do balanço
+    const sway = size.width < size.height ? 0.6 : 1.6;
+    tmpCam.copy(flow.packet).add({ x: swing * sway + par.current.x * 0.6, y: 0.85 - par.current.y * 0.4, z: 5.6 + swing * 1.2 } as THREE.Vector3);
     tmpLook.copy(flow.packet).add({ x: 0, y: -0.1, z: -5 } as THREE.Vector3);
 
     // vista final: a arquitetura inteira, de lado (desktop) ou em perspectiva (retrato)
     const aspect = size.width / size.height;
+    // tela em pé estreita o campo de visão horizontal e a cena parece "com zoom":
+    // no retrato a lente abre (50° → 79°); no desktop nada muda
+    const fov = aspect < 1 ? 79 : 50;
+    const cam = camera as THREE.PerspectiveCamera;
+    if (cam.fov !== fov) {
+      cam.fov = fov;
+      cam.updateProjectionMatrix();
+    }
     if (aspect >= 1) {
       // enquadra os 60 u do túnel com folga; câmera um pouco acima e à frente = leve perspectiva
       const dist = 35 / (Math.tan((25 * Math.PI) / 180) * Math.min(aspect, 2.2));
