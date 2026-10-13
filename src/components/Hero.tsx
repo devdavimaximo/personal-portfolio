@@ -127,6 +127,10 @@ export default function Hero() {
         <p className="hero__lede" data-intro>
           {hero.lede} <em>{hero.ledeAccent}</em>
         </p>
+        <p className="hero__hint hero__hint--touch" data-intro>
+          <span className="hero__lens" aria-hidden="true" />
+          {hero.hintTouch}
+        </p>
       </div>
 
       <h1 className="hero__name" aria-label={profile.name}>

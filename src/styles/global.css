@@ -2519,3 +2519,18 @@ html.is-glitch body {
     animation: none;
   }
 }
+
+/* retrato no toque: arrasto vertical rola a página; lateral, diagonal e segurar mexem a lente */
+.portrait {
+  touch-action: pan-y;
+}
+
+.hero__hint--touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .hero__meta .hero__hint--touch {
+    display: inline-flex;
+  }
+}

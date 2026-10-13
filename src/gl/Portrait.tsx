@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { loadPortrait, type PortraitAssets } from '../lib/portrait';
-import { LITE, REDUCED, damp } from '../lib/env';
+import { FINE_POINTER, LITE, REDUCED, damp } from '../lib/env';
 import { signals } from '../lib/scroller';
 import { portraitFrag, quadVert } from './portraitShader';
 import { ACCENT as ACCENT_HEX, BONE as BONE_HEX, srgb } from './color';
@@ -10,6 +10,9 @@ import AdaptiveDpr from './AdaptiveDpr';
 
 const BONE = srgb(BONE_HEX);
 const ACCENT = srgb(ACCENT_HEX);
+
+/** dedo sobre o retrato: só existe enquanto o gesto pertence ao retrato (ver touch-action no CSS) */
+const touch = { x: 0, y: 0, down: false, fresh: false };
 
 /** ponteiro em pixels de tela, compartilhado (um único listener) */
 const pointer = { x: -9999, y: -9999, active: false, t: 0 };
@@ -69,6 +72,39 @@ function Glyphs({ assets, host }: { assets: PortraitAssets; host: HTMLElement })
 
   useEffect(() => () => material.dispose(), [material]);
 
+  // toque: o navegador fica com os arrastos verticais (rolagem, via touch-action: pan-y)
+  // e entrega ao retrato os laterais, diagonais deitados, toques e o segurar.
+  // Se ele assumir o gesto para rolar, chega pointercancel e a lente se apaga.
+  useEffect(() => {
+    const down = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse') return;
+      touch.x = e.clientX;
+      touch.y = e.clientY;
+      touch.down = true;
+      touch.fresh = true;
+    };
+    const move = (e: PointerEvent) => {
+      if (!touch.down || e.pointerType === 'mouse') return;
+      touch.x = e.clientX;
+      touch.y = e.clientY;
+    };
+    const up = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') touch.down = false;
+    };
+    host.addEventListener('pointerdown', down);
+    host.addEventListener('pointermove', move);
+    host.addEventListener('pointerup', up);
+    host.addEventListener('pointercancel', up);
+    host.addEventListener('pointerleave', up);
+    return () => {
+      host.removeEventListener('pointerdown', down);
+      host.removeEventListener('pointermove', move);
+      host.removeEventListener('pointerup', up);
+      host.removeEventListener('pointercancel', up);
+      host.removeEventListener('pointerleave', up);
+    };
+  }, [host]);
+
   // ajusta grade e enquadramento quando o canvas muda de tamanho
   useEffect(() => {
     const dpr = gl.getPixelRatio();
@@ -120,18 +156,28 @@ function Glyphs({ assets, host }: { assets: PortraitAssets; host: HTMLElement })
     u.uIntro.value = s.intro;
     u.uOut.value = damp(u.uOut.value, signals.heroOut, 8, dt);
 
-    // alvo da lente: mouse real no desktop, passeio automático no toque/ocioso
-    let tx: number;
-    let ty: number;
+    // alvo da lente: dedo no toque, mouse no desktop, passeio automático só no desktop ocioso
+    let tx = s.mx;
+    let ty = s.my;
     let want = 0;
     const idle = performance.now() - pointer.t > 4000;
-    if (pointer.active && !idle) {
+    if (touch.down) {
+      tx = (touch.x - rect.left) * dpr;
+      ty = (rect.bottom - touch.y) * dpr;
+      want = 1;
+      // a lente nasce embaixo do dedo, em vez de deslizar de onde estava
+      if (touch.fresh) {
+        touch.fresh = false;
+        s.mx = tx;
+        s.my = ty;
+      }
+    } else if (pointer.active && !idle) {
       tx = (pointer.x - rect.left) * dpr;
       ty = (rect.bottom - pointer.y) * dpr;
       const inside = pointer.x > rect.left - 40 && pointer.x < rect.right + 40 && pointer.y > rect.top && pointer.y < rect.bottom;
       want = inside ? 1 : 0;
-    } else {
-      // lissajous sobre o rosto (coordenadas relativas à imagem, não ao canvas)
+    } else if (FINE_POINTER) {
+      // desktop parado: lissajous sobre o rosto (coordenadas relativas à imagem, não ao canvas)
       const sz = u.uImgSize.value;
       const of = u.uImgOffset.value;
       tx = of.x + sz.x * (0.5 + Math.sin(t * 0.45) * 0.14);

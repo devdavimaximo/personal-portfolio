@@ -23,6 +23,7 @@ export const hero = {
   lede: 'Eu escrevo a parte do software que ninguém vê.',
   ledeAccent: 'E é ela que não pode cair.',
   hint: 'passe o mouse no retrato para descompilar',
+  hintTouch: 'deslize o dedo no retrato para descompilar',
 };
 
 export const manifesto =
