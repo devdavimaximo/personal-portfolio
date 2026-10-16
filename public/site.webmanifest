@@ -1,0 +1,13 @@
+{
+  "name": "Davi Maximo Quoos",
+  "short_name": "Davi Maximo",
+  "description": "Portfólio de Davi Maximo Quoos, desenvolvedor fullstack e backend C# / .NET.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#09090B",
+  "theme_color": "#09090B",
+  "icons": [
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "favicon-32.png", "sizes": "32x32", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://davi.metup.com.br/sitemap.xml
